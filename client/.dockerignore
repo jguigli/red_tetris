@@ -1,0 +1,23 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+
+# Build artifacts
+build
+dist
+
+# Test files
+test
+coverage
+.nyc_output
+
+# Docker files
+Dockerfile*
+docker-compose.yml
+.dockerignore
+
+# Miscellaneous
+README.md 

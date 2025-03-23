@@ -1,5 +1,5 @@
 {
-  "name": "red_tetrisboilerplate",
+  "name": "red_tetris_client",
   "version": "0.0.1",
   "author": "redpelicans",
   "license": "MIT",
@@ -7,19 +7,21 @@
     "eslint": "eslint src",
     "client-dist": "NODE_ENV=production webpack --progress --colors",
     "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
-    "srv-dev": "DEBUG=tetris:* babel-watch -w src src/server/main.js",
-    "srv-dist": "DEBUG=tetris:* babel src --out-dir dist",
-    "test": "mocha --require babel-core/register --reporter spec",
-    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require babel-core/register mocha "
+    "test": "mocha --require babel-core/register --reporter spec test",
+    "test:all": "mocha --require babel-core/register --reporter spec test/**/*.js",
+    "coverage": "NODE_ENV=test nyc --include src --all -r text -r lcov -r text --require babel-core/register mocha test/**/*.js"
   },
   "dependencies": {
+    "immutable": "^4.3.4",
+    "lodash": "^4.17.21",
+    "ramda": "^0.29.1",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
-    "socket.io": "^1.4.6"
+    "socket.io-client": "^1.4.6"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
@@ -42,7 +44,8 @@
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "react-addons-test-utils": "^15.0.2"
   },
   "nyc": {
     "exclude": [
@@ -56,4 +59,4 @@
       "stage-0"
     ]
   }
-}
+} 

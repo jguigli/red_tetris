@@ -1,0 +1,28 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+
+# Build artifacts
+build
+
+# Test files
+test
+coverage
+.nyc_output
+
+# Docker files
+Dockerfile*
+docker-compose.yml
+.dockerignore
+
+# Editor configs
+.editorconfig
+.eslintrc
+.eslintignore
+
+# Miscellaneous
+README.md
+Makefile 

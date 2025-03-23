@@ -1,4 +1,4 @@
-import * as server from '../../src/server/index'
+import * as server from '../../src/index'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
@@ -40,4 +40,4 @@ const socketIoMiddleWare = socket => ({dispatch, getState}) => {
     if(socket && action.type && action.type.indexOf('server/') === 0) socket.emit('action', action)
     return next(action)
   }
-}
+} 

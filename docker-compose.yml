@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: red_tetris_server
+    restart: unless-stopped
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./server/src:/app/src
+      - ./server/params.js:/app/params.js
+      - ./server/test:/app/test
+    environment:
+      - NODE_ENV=development
+      - DEBUG=tetris:*
+    networks:
+      - tetris-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: red_tetris_client
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./client/src:/app/src
+      - ./server/webpack.config.js:/app/webpack.config.js
+      - ./server/index.html:/app/index.html
+      - ./client/test:/app/test
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - server
+    networks:
+      - tetris-network
+
+networks:
+  tetris-network:
+    driver: bridge 

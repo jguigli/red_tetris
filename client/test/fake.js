@@ -7,5 +7,4 @@ describe('Check Sum', () => {
     const res = 1 + 1
     res.should.equal(2)
   });
-
-});
+}); 
