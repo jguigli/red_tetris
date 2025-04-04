@@ -310,8 +310,6 @@ class Game
       {
         if (board[row][col] !== 0)
         {
-          console.log(row)
-          console.log(col)
           specter[row][col] = "white";
           break;
         }
@@ -349,7 +347,6 @@ class Game
         name: this.rooms[roomId].players[player.socket.id].name
       };
     });
-    // console.log(gameState)
     return gameState
   }
 
