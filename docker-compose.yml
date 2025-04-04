@@ -13,6 +13,10 @@ services:
       - ./server/src:/app/src
       - ./server/params.js:/app/params.js
       - ./server/test:/app/test
+      - ./.eslintrc:/app/.eslintrc
+      - ./.editorconfig:/app/.editorconfig
+      - ./.eslintignore:/app/.eslintignore
+      - ./.babelrc:/app/.babelrc
     environment:
       - NODE_ENV=development
       - DEBUG=tetris:*
@@ -29,9 +33,13 @@ services:
       - "8080:8080"
     volumes:
       - ./client/src:/app/src
-      - ./server/webpack.config.js:/app/webpack.config.js
+      - ./client/webpack.config.js:/app/webpack.config.js
       - ./server/index.html:/app/index.html
       - ./client/test:/app/test
+      - ./.eslintrc:/app/.eslintrc
+      - ./.editorconfig:/app/.editorconfig
+      - ./.eslintignore:/app/.eslintignore
+      - ./.babelrc:/app/.babelrc
     environment:
       - NODE_ENV=development
     depends_on:

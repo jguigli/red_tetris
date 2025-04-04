@@ -3,12 +3,8 @@ FROM node:16-alpine
 WORKDIR /app
 
 COPY package.json .
-COPY .babelrc .
 COPY params.js .
-
-COPY .editorconfig .
-COPY .eslintrc .
-COPY .eslintignore .
+COPY .babelrc .
 
 RUN npm install
 

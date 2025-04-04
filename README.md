@@ -134,3 +134,7 @@ The `Makefile` provides several commands for managing the application:
 | `make test-all` | Run all tests |
 | `make install` | Install dependencies |
 | `make help` | Show available commands |
+
+## Usefuls links
+
+* [Tetris pieces](http://lwh.free.fr/pages/vari/tp/TP2001-11/pieces.html)
