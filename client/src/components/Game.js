@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom'
-import TetrisBoard from './Board'
+import { useParams, useNavigate } from 'react-router-dom'
+import TetrisBoard from './Board.js'
 import './styles.css'
-import { joinGameServer, leaveGameServer, setIsNew, gameIsReachable } from '../actions/game'
+import { joinGameServer, leaveGameServer, setIsNew, gameIsReachable } from '../actions/game.js'
 
 const Game = ({ isReachable, gameOn, gameOver, isLeader, isAlive, isNew, dispatch }) => {
   const { roomid, playername } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   
   useEffect(() => {
     const isValidRoomId = Number.isInteger(Number(roomid));
     if (!isValidRoomId)
-      history.push('/error')
+      navigate('/error')
 
     if (roomid && playername)
       dispatch(joinGameServer(playername, roomid));
@@ -26,7 +26,7 @@ const Game = ({ isReachable, gameOn, gameOver, isLeader, isAlive, isNew, dispatc
 
   useEffect(() => {
     if (!isReachable)
-      history.push('/not_reachable')
+      navigate('/not_reachable')
     
     return () => {
       dispatch(gameIsReachable(true))

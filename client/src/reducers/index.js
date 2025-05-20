@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import alert from './alert'
-import game from './game'
+import alertReducer from './alert.js'
+import gameReducer from './game.js'
 
 export default combineReducers({
-  message: alert,
-  game
+  alert: alertReducer,
+  game: gameReducer
 })

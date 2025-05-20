@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ErrorPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
     
   return (
     <div className="error-container">
@@ -10,7 +10,7 @@ const ErrorPage = () => {
       <p>Please use the format: /room_id/player_name</p>
       <p>Example: http:localhost:8080/1/player1</p>
 
-      <button onClick={() => {history.push('/');}} className="go-home-button">
+      <button onClick={() => {navigate('/');}} className="go-home-button">
         Go to Home
       </button>
     </div>

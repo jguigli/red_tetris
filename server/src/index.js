@@ -1,7 +1,8 @@
 import fs  from 'fs'
 import debug from 'debug'
-import Game from './game'
-import Player from './player'
+import Game from './game.js'
+import { createServer } from 'http'
+import { Server } from 'socket.io'
 
 const logerror = debug('tetris:error')
   , loginfo = debug('tetris:info')
@@ -9,8 +10,11 @@ const logerror = debug('tetris:error')
 const initApp = (app, params, cb) => {
   const {host, port} = params
   const handler = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    
     if (req.url === '/bundle.js') {
-      fs.readFile(__dirname + '/../../build/bundle.js', (err, data) => {
+      fs.readFile('/app/build/bundle.js', (err, data) => {
         if (err) {
           logerror(err)
           res.writeHead(500)
@@ -20,7 +24,7 @@ const initApp = (app, params, cb) => {
         res.end(data)
       })
     } else {
-      fs.readFile(__dirname + '/../../index.html', (err, data) => {
+      fs.readFile('/app/index.html', (err, data) => {
         if (err) {
           logerror(err)
           res.writeHead(500)
@@ -169,14 +173,20 @@ const initEngine = io => {
   })
 }
 
-export function create(params){
-  const promise = new Promise( (resolve, reject) => {
-    const app = require('http').createServer()
-    initApp(app, params, () =>{
-      const io = require('socket.io')(app)
+export function create(params) {
+  return new Promise((resolve) => {
+    const app = createServer()
+
+    initApp(app, params, () => {
+      const io = new Server(app, {
+        cors: {
+          origin: '*',
+          methods: ['GET', 'POST'],
+        }
+      });
       const stop = (cb) => {
         io.close()
-        app.close( () => {
+        app.close(() => {
           app.unref()
         })
         loginfo(`Engine stopped.`)
@@ -184,8 +194,7 @@ export function create(params){
       }
 
       initEngine(io)
-      resolve({stop})
+      resolve({ stop })
     })
   })
-  return promise
 }

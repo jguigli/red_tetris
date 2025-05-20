@@ -1,4 +1,4 @@
-import * as server from '../../src/index'
+import * as server from '../../src/index.js'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 

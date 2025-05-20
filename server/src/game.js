@@ -1,5 +1,5 @@
-import Piece from './piece'
-import Player from './player'
+import Piece from './piece.js'
+import Player from './player.js'
 
 class Game
 {
@@ -298,7 +298,6 @@ class Game
 
   createSpecter(board)
   {
-    console.table(board)
     if (!board)
       return Array(20).fill(Array(10).fill(0))
     
@@ -315,7 +314,6 @@ class Game
         }
       }
     }
-    console.table(specter)
     
     return specter;
   };

@@ -16,9 +16,9 @@ services:
       - ./.eslintrc:/app/.eslintrc
       - ./.editorconfig:/app/.editorconfig
       - ./.eslintignore:/app/.eslintignore
-      - ./.babelrc:/app/.babelrc
+      - ./babel.config.js:/app/babel.config.js
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DEBUG=tetris:*
     networks:
       - tetris-network
@@ -34,14 +34,13 @@ services:
     volumes:
       - ./client/src:/app/src
       - ./client/webpack.config.js:/app/webpack.config.js
-      - ./server/index.html:/app/index.html
       - ./client/test:/app/test
       - ./.eslintrc:/app/.eslintrc
       - ./.editorconfig:/app/.editorconfig
       - ./.eslintignore:/app/.eslintignore
-      - ./.babelrc:/app/.babelrc
+      - ./babel.config.js:/app/babel.config.js
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     depends_on:
       - server
     networks:

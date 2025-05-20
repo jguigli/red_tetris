@@ -1,41 +1,50 @@
-var path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query:{
-          presets: ["es2015", "react", "stage-0"]
+        use: {
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
 
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+
   devServer: {
+    static: {
+      directory: path.join(__dirname)
+    },
     historyApiFallback: true,
     hot: true,
-    inline: true,
     host: '0.0.0.0',
     port: 8080,
-    publicPath: '/',
-    disableHostCheck: true,
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
-  }
-}; 
+  },
+
+  mode: 'development'
+};

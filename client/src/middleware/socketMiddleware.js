@@ -12,19 +12,21 @@ import {
   startGame,
   setOtherPlayers,
   setIsNew
-} from '../actions/game'
+} from '../actions/game.js'
 
 const socketMiddleware = () => {
   let socket = null
 
   return store => next => action => {
-
+    
     if (!socket)
-    {
-      socket = io('http://localhost:3004')
-      
-      socket.on('game_update', data => {
-        const { gameOn, gameOver, players } = data
+      {
+        socket = io('http://localhost:3004')
+        
+        socket.on('game_update', data => {
+          const { gameOn, gameOver, players } = data
+          
+          
 
         const { [socket.id]: player, ...otherPlayers } = players
 

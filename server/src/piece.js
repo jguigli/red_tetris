@@ -4,7 +4,7 @@ class Piece
   constructor(type, x, y)
   {
     if (!Piece.pieces[type])
-      throw new Error(`Incorrect piece : ${type}`);
+      throw new Error('Invalid piece type');
 
     const { shape, color, number } = Piece.pieces[type];
 

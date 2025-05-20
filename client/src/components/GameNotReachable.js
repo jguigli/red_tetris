@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const GameNotReachable = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
     
   return (
     <div className="not-reachable-container">
@@ -10,7 +10,7 @@ const GameNotReachable = () => {
       <p>The game you are trying to join is currently in progress.</p>
       <p>Please wait for the next game to start or try joining later.</p>
 
-      <button onClick={() => history.push('/')} className="go-home-button">
+      <button onClick={() => navigate('/')} className="go-home-button">
         Go to Home
       </button>
     </div>

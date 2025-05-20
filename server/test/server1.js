@@ -1,6 +1,6 @@
 import chai from "chai"
-import {startServer, configureStore} from './helpers/server'
-import params from '../params'
+import {startServer, configureStore} from './helpers/server.js'
+import params from '../params.js'
 import io from 'socket.io-client'
 
 chai.should()

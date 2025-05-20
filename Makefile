@@ -27,10 +27,10 @@ clean:
 	docker-compose down --rmi all --volumes
 
 server-test:
-	docker-compose run --rm server npm test
+	docker-compose run --rm server npm run test
 
 client-test:
-	docker-compose run --rm client npm test
+	docker-compose run --rm client npm run test:all
 
 test-all: server-test client-test
 
@@ -39,10 +39,6 @@ server-up:
 
 client-up:
 	docker-compose up -d client
-
-install:
-	cd server && npm install
-	cd client && npm install
 
 help:
 	@echo "RedTetris Docker Management"
@@ -60,5 +56,4 @@ help:
 	@echo "make server-test  - Run tests for server in Docker container"
 	@echo "make client-test  - Run tests for client in Docker container"
 	@echo "make test-all     - Run all tests (both client and server)"
-	@echo "make install      - Install dependencies for both client and server"
 	@echo "make help         - Show this help message" 

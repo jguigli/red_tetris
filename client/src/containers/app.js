@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch, Link, useParams, useHistory } from 'react-router-dom'
-import TetrisBoard from '../components/Board'
-import Home from '../components/Home'
-import Game from '../components/Game'
-import GameNotreachable from '../components/GameNotReachable'
-import ErrorPage from '../components/ErrorPage'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import Home from '../components/Home.js'
+import Game from '../components/Game.js'
+import GameNotreachable from '../components/GameNotReachable.js'
+import ErrorPage from '../components/ErrorPage.js'
 import '../components/styles.css'
 import {
   startGameServer,
   restartGameServer,
   playerMove
-} from '../actions/game'
+} from '../actions/game.js'
 
 const App = ({ gameOver, dispatch }) => {
-  const history = useHistory()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -35,7 +34,7 @@ const App = ({ gameOver, dispatch }) => {
           dispatch(playerMove('DROP'))
           break
         case 'Escape':
-          history.push("/")
+          navigate('/');
           break
         case 'Enter':
           if (gameOver)
@@ -57,23 +56,13 @@ const App = ({ gameOver, dispatch }) => {
 
   return (
     <div className="app-container">
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/:roomid/:playername">
-          <Game />
-        </Route>
-        <Route path="/not_reachable">
-          <GameNotreachable />
-        </Route>
-        <Route path="/error">
-          <ErrorPage />
-        </Route>
-        <Route path="*">
-          <ErrorPage />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:roomid/:playername" element={<Game />} />
+        <Route path="/not_reachable" element={<GameNotreachable />} />
+        <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </div>
   )
 }
